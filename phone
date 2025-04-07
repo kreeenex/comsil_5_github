@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]
+then
+	echo "Usage:phone searchfor [...serchfor]" 
+	echo "(You didn't tell me what you want to search for.)" 
+	exit 1
+fi
+
+grep -E "$(echo "$*" | sed 's/ /|/g')" "mydata.txt" | while IFS="|" read -r name address phone
+do
+	echo "--------------->"
+	echo "name: $name"
+	echo "address $address"
+	echo "phone: $phone"
+	echo "<---------------"
+done
